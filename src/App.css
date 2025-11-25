@@ -1,8 +1,58 @@
-.header-container h1{
+.header-container h1 {
   font-size: 1.25rem;
   font-weight: 500;
 }
 
-.game-container{
+.game-container {
   height: 100vh;
+}
+
+.programs-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  text-align: center;
+}
+.programs-container p {
+  border-radius: 3px;
+}
+.letter-container {
+  margin-top: 6rem;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 6px;
+  border-radius: 4px;
+  grid-template-rows: repeat(3, 1fr);
+  justify-items: center;
+}
+.letter {
+  width: 50px;
+  height: 40px;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 6px;
+}
+/* center the bottom of alphabet */
+
+.div20 {
+    grid-column-start: 3;
+}
+
+.div21 {
+    grid-column-start: 4;
+}
+
+.div22 {
+    grid-column-start: 5;
+}
+
+.div23 {
+    grid-column-start: 6;
+}
+
+.div24 {
+    grid-column-start: 7;
+}
+
+.div25 {
+    grid-column-start: 8;
 }
