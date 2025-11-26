@@ -6,17 +6,33 @@
 .game-container {
   height: 100vh;
 }
-
-.programs-container {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+.guess-container {
+  display: flex;
+}
+.guess-letter {
+  width: 40px;
+  height: 40px;
+  border-bottom: 1px solid #F9F4DA;
+  padding: 6px;
+  gap: 6px;
+  background-color: #323232;
+  margin: 6px;
   text-align: center;
+  color: #F9F4DA;
+}
+.programs-container {
+  display: flex;
+  width: 300px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 4.5px;
+  gap: 4.5px;
 }
 .programs-container p {
   border-radius: 3px;
 }
 .letter-container {
-  margin-top: 6rem;
+  margin-top: 3rem;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   gap: 6px;
@@ -34,25 +50,25 @@
 /* center the bottom of alphabet */
 
 .div20 {
-    grid-column-start: 3;
+  grid-column-start: 3;
 }
 
 .div21 {
-    grid-column-start: 4;
+  grid-column-start: 4;
 }
 
 .div22 {
-    grid-column-start: 5;
+  grid-column-start: 5;
 }
 
 .div23 {
-    grid-column-start: 6;
+  grid-column-start: 6;
 }
 
 .div24 {
-    grid-column-start: 7;
+  grid-column-start: 7;
 }
 
 .div25 {
-    grid-column-start: 8;
+  grid-column-start: 8;
 }

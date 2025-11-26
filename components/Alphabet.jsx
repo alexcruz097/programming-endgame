@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 as uuidv4 } from "uuid"; // For ESM
 
 function Alphabet() {
   const alphabet = [
@@ -34,7 +35,7 @@ function Alphabet() {
       {/* iterate thru the array to show alphabet */}
       {alphabet.map((letter, index) => {
         return (
-          <button className={`div${index} letter bg-amber-400`}>
+          <button key={uuidv4()} className={`div${index} letter bg-amber-400`}>
             {letter}
           </button>
         );
