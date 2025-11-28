@@ -12,13 +12,13 @@
 .guess-letter {
   width: 40px;
   height: 40px;
-  border-bottom: 1px solid #F9F4DA;
+  border-bottom: 1px solid #f9f4da;
   padding: 6px;
   gap: 6px;
   background-color: #323232;
   margin: 6px;
   text-align: center;
-  color: #F9F4DA;
+  color: #f9f4da;
 }
 .programs-container {
   display: flex;
@@ -71,4 +71,12 @@
 
 .div25 {
   grid-column-start: 8;
+}
+
+/* helper style */
+.guess-letter-correct {
+  background-color: #10a95b;
+}
+.guess-letter-incorrect {
+  background-color: #ec5d49;
 }
