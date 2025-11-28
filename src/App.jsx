@@ -12,12 +12,18 @@ function App() {
   const programNames = programmingName;
   const [guessWord, setGuessWord] = useState([]);
   const [alphabetLetters, setAlphabetLetters] = useState([]);
-  const [userGuessLetter, setUserGuessLetter] = useState([]);
+  const [numTries, setNumTries] = useState(0);
   // useEffect to set random Number
   const getWord = useEffectEvent(() => {
     // ✅ Only runs once per app load
     const randomNum = Math.floor(Math.random() * words.length);
-    setGuessWord(words[randomNum].split(""));
+    let wordArr = words[randomNum].split("");
+    // set the guess word with hidden letters
+    setGuessWord(() => {
+      return wordArr.map((letter) => {
+        return { letter: letter, hidden: true };
+      });
+    });
     // get alphabet
     setAlphabetLetters(alphabet);
   });
@@ -28,19 +34,36 @@ function App() {
   const getUserInput = (e) => {
     // check if letter pressed matches with any letter in the guess word
     let letterGuess = e.target.value.toLowerCase();
-    if (guessWord.includes(letterGuess)) {
+
+    const matchingLetter = guessWord.some((letter) => {
+      return letter.letter === letterGuess;
+    });
+    // change the color of the background
+    if (matchingLetter) {
       setAlphabetLetters((prevLetters) => {
         return prevLetters.map((letter) => {
           if (letterGuess.toUpperCase() === letter.letter) {
             return { ...letter, bgColor: "bg-green-400" };
           } else {
             return letter;
-          } // add the guess word
+          }
         });
       });
     }
-
-    if (!guessWord.includes(letterGuess)) {
+    // update the display of the guess word
+    if (matchingLetter) {
+      setGuessWord((prev) => {
+        return prev.map((letter) => {
+          if (letterGuess === letter.letter) {
+            return { ...letter, hidden: false };
+          } else {
+            return letter;
+          }
+        });
+      });
+    }
+    // if no match, change the background color to red
+    if (!matchingLetter) {
       setAlphabetLetters((prevLetters) => {
         return prevLetters.map((letter) => {
           if (letterGuess.toUpperCase() === letter.letter) {
@@ -70,7 +93,6 @@ function App() {
         alphabetLetters={alphabetLetters}
         guessWord={guessWord}
         getUserInput={getUserInput}
-        userGuessLetter={userGuessLetter}
       />
     </div>
   );

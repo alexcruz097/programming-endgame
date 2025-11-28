@@ -6,7 +6,7 @@ function WordToGuess({ guessWord }) {
       {guessWord.map((letter) => {
         return (
           <p key={uuidv4()} className="guess-letter">
-            {letter.toUpperCase()}
+            {letter.hidden ? null: letter.letter.toUpperCase() }
           </p>
         );
       })}
