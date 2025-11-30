@@ -49,6 +49,8 @@ function App() {
           }
         });
       });
+      // update number of tries
+      setNumTries((prev) => prev + 1);
     }
     // update the display of the guess word
     if (matchingLetter) {
@@ -73,9 +75,17 @@ function App() {
           } // add the guess word
         });
       });
+      setNumTries((prev) => prev + 1);
     }
   };
+switch (numTries) {
+  case 1:
+    
+    break;
 
+  default:
+    break;
+}
   return (
     <div
       className="
