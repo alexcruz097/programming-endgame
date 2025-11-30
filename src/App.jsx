@@ -9,10 +9,10 @@ import { words } from "../word";
 import { alphabet } from "../alphabetLetter";
 import WordToGuess from "../components/WordToGuess";
 function App() {
-  const programNames = programmingName;
+  const [programNames, setProgamName] = useState(programmingName);
   const [guessWord, setGuessWord] = useState([]);
   const [alphabetLetters, setAlphabetLetters] = useState([]);
-  const [numTries, setNumTries] = useState(0);
+  const [numAttempts, setNumAttemps] = useState(0);
   // useEffect to set random Number
   const getWord = useEffectEvent(() => {
     // ✅ Only runs once per app load
@@ -27,6 +27,7 @@ function App() {
     // get alphabet
     setAlphabetLetters(alphabet);
   });
+  console.log(programNames);
   useEffect(() => {
     getWord();
   }, []);
@@ -50,7 +51,7 @@ function App() {
         });
       });
       // update number of tries
-      setNumTries((prev) => prev + 1);
+      setNumAttemps((prev) => prev + 1);
     }
     // update the display of the guess word
     if (matchingLetter) {
@@ -75,17 +76,44 @@ function App() {
           } // add the guess word
         });
       });
-      setNumTries((prev) => prev + 1);
+      setNumAttemps((prev) => prev + 1);
     }
   };
-switch (numTries) {
-  case 1:
-    
-    break;
 
-  default:
-    break;
-}
+  // helper function to update deleted state from program
+  const setProgramDeleted = (programName) => {
+    setProgamName((prevPrograms) => {
+      return prevPrograms.map((program) => {
+        if (program.name === programName) {
+          return { ...program, deleted: true };
+        } else {
+          return program;
+        } // add the guess word
+      });
+    });
+  };
+  useEffect(() => {
+    if (numAttempts === 1) {
+      setProgramDeleted("HTML");
+      setProgramDeleted("CSS");
+    } else if (numAttempts === 2) {
+      setProgramDeleted("Javascript");
+    } else if (numAttempts === 3) {
+      setProgramDeleted("React");
+    } else if (numAttempts === 4) {
+      setProgramDeleted("Typescript");
+    } else if (numAttempts === 5) {
+      setProgramDeleted("Node.js");
+    } else if (numAttempts === 6) {
+      setProgramDeleted("Python");
+    } else if (numAttempts === 7) {
+      setProgramDeleted("Ruby");
+    } else if (numAttempts === 8) {
+      setProgramDeleted("Assembly");
+      alert("Game Deleted");
+    }
+  }, [numAttempts]);
+
   return (
     <div
       className="
