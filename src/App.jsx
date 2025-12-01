@@ -13,6 +13,8 @@ function App() {
   const [guessWord, setGuessWord] = useState([]);
   const [alphabetLetters, setAlphabetLetters] = useState([]);
   const [numAttempts, setNumAttemps] = useState(0);
+  const [language, setlanguage] = useState("");
+  const [randomNum, setRandomNum] = useState(0);
   // useEffect to set random Number
   const getWord = useEffectEvent(() => {
     // ✅ Only runs once per app load
@@ -50,8 +52,6 @@ function App() {
           }
         });
       });
-      // update number of tries
-      setNumAttemps((prev) => prev + 1);
     }
     // update the display of the guess word
     if (matchingLetter) {
@@ -77,6 +77,8 @@ function App() {
         });
       });
       setNumAttemps((prev) => prev + 1);
+      // update the randomNum
+      setRandomNum(Math.floor(Math.random() * 11));
     }
   };
 
@@ -92,25 +94,40 @@ function App() {
       });
     });
   };
+
+  // generate random num
+
   useEffect(() => {
     if (numAttempts === 1) {
       setProgramDeleted("HTML");
       setProgramDeleted("CSS");
+      // set the language that is getting delted
+      setlanguage("HTML and CSS");
     } else if (numAttempts === 2) {
       setProgramDeleted("Javascript");
+      // set the language that is getting delted
+      setlanguage("Javascript");
     } else if (numAttempts === 3) {
       setProgramDeleted("React");
+      // set the language that is getting delted
+      setlanguage("React");
     } else if (numAttempts === 4) {
       setProgramDeleted("Typescript");
+      // set the language that is getting delted
+      setlanguage("Typescript");
     } else if (numAttempts === 5) {
       setProgramDeleted("Node.js");
+      // set the language that is getting delted
+      setlanguage("Node.js");
     } else if (numAttempts === 6) {
       setProgramDeleted("Python");
+      setlanguage("Python");
     } else if (numAttempts === 7) {
       setProgramDeleted("Ruby");
+      setlanguage("Ruby");
     } else if (numAttempts === 8) {
       setProgramDeleted("Assembly");
-      alert("Game Deleted");
+      setlanguage("Assembly");
     }
   }, [numAttempts]);
 
@@ -124,13 +141,14 @@ function App() {
       "
     >
       <Header />
-      <Feedback />
+      <Feedback language={language} randomNum={randomNum} />
       <Programs programNames={programNames} />
       <WordToGuess guessWord={guessWord} />
       <Alphabet
         alphabetLetters={alphabetLetters}
         guessWord={guessWord}
         getUserInput={getUserInput}
+        setRandomNum={setRandomNum}
       />
     </div>
   );

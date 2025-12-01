@@ -2,6 +2,8 @@ import React from "react";
 import { v4 as uuidv4 } from "uuid"; // For ESM
 
 function Alphabet({ getUserInput, guessWord, alphabetLetters }) {
+  // update the random num when click
+  
   return (
     <div className="letter-container">
       {/* iterate thru the array to show alphabet */}
