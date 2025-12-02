@@ -1,25 +1,32 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid"; // For ESM
 
-function Alphabet({ getUserInput, guessWord, alphabetLetters }) {
+function Alphabet({ getUserInput, alphabetLetters, isGameOver, startOver }) {
   // update the random num when click
-  
+
   return (
-    <div className="letter-container">
-      {/* iterate thru the array to show alphabet */}
-      {alphabetLetters.map((alpha, index) => {
-        return (
-          <button
-            value={alpha.letter}
-            onClick={getUserInput}
-            key={uuidv4()}
-            className={`div${index}  letter ${alpha.bgColor}`}
-          >
-            {alpha.letter}
-          </button>
-        );
-      })}
-    </div>
+    <>
+      <div className="letter-container">
+        {/* iterate thru the array to show alphabet */}
+        {alphabetLetters.map((alpha, index) => {
+          return (
+            <button
+              value={alpha.letter}
+              onClick={getUserInput}
+              key={uuidv4()}
+              className={`div${index}  letter ${alpha.bgColor}`}
+            >
+              {alpha.letter}
+            </button>
+          );
+        })}
+      </div>
+      {isGameOver ? (
+        <button onClick={startOver} className="bg-sky-400 mt-7 rounded-sm py-2.5 px-4 border-neutral-300 cursor-pointer">
+          Start New Game
+        </button>
+      ) : null}
+    </>
   );
 }
 

@@ -1,6 +1,8 @@
-import React, { useEffect, useEffectEvent, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-function Feedback({ language, randomNum }) {
+function Feedback({ language, randomNum, numAttempts, isGameOver }) {
+  const [showMessage, setShowMessage] = useState(false);
+
   const options = [
     `Farewell, ${language}`,
     `Adios, ${language}`,
@@ -15,16 +17,34 @@ function Feedback({ language, randomNum }) {
     `${language}, your watch has ended`,
     `${language} has left the building`,
   ];
+  useEffect(() => {
+    setShowMessage(true);
+    const timer = setTimeout(
+      () => {
+        setShowMessage(false);
+      },
+      numAttempts===8 ? 999999 : 1500
+    );
+    // clean up timeout
+    return () => clearTimeout(timer);
+  }, [numAttempts]);
 
   return (
-    <div
-      className="bg-violet-500 text-white 
+    <>
+      {showMessage ? (
+        <div
+          className={`${isGameOver?"bg-red-500": "bg-violet-500"} text-white 
     w-xs h-13 flex justify-center items-center
-    rounded-[4px] border-dashed border-neutral-800
-    my-6"
-    >
-      <p>{options[randomNum]}</p>
-    </div>
+    rounded-sm border-dashed border-neutral-800
+    my-6`}
+        >
+          {/* check if game is over */}
+          {isGameOver ? "Game Over" : <p>{options[randomNum]}</p>}
+        </div>
+      ) : (
+        <div className="h-25"></div>
+      )}
+    </>
   );
 }
 

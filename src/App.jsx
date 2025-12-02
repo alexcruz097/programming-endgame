@@ -15,6 +15,8 @@ function App() {
   const [numAttempts, setNumAttemps] = useState(0);
   const [language, setlanguage] = useState("");
   const [randomNum, setRandomNum] = useState(0);
+  const [isGameOver, setIsGameOver] = useState(false);
+  const [restartGame, setRestartGame] = useState(false);
   // useEffect to set random Number
   const getWord = useEffectEvent(() => {
     // ✅ Only runs once per app load
@@ -26,13 +28,25 @@ function App() {
         return { letter: letter, hidden: true };
       });
     });
+    // setrestart game to false
+    setRestartGame(false);
+    // isgameover to false
+    setIsGameOver(false);
     // get alphabet
     setAlphabetLetters(alphabet);
+    // reset num of attemps
+    setNumAttemps(0);
+    // update programs
+    setProgamName((prevProgram) => {
+      return prevProgram.map((program) => {
+        return { ...program, deleted: false };
+      });
+    });
   });
   console.log(programNames);
   useEffect(() => {
     getWord();
-  }, []);
+  }, [restartGame]);
   // get the letter of the user
   const getUserInput = (e) => {
     // check if letter pressed matches with any letter in the guess word
@@ -128,9 +142,13 @@ function App() {
     } else if (numAttempts === 8) {
       setProgramDeleted("Assembly");
       setlanguage("Assembly");
+      setIsGameOver(true);
     }
   }, [numAttempts]);
 
+  const startOver = () => {
+    setRestartGame(true);
+  };
   return (
     <div
       className="
@@ -141,7 +159,12 @@ function App() {
       "
     >
       <Header />
-      <Feedback language={language} randomNum={randomNum} />
+      <Feedback
+        language={language}
+        randomNum={randomNum}
+        numAttempts={numAttempts}
+        isGameOver={isGameOver}
+      />
       <Programs programNames={programNames} />
       <WordToGuess guessWord={guessWord} />
       <Alphabet
@@ -149,6 +172,8 @@ function App() {
         guessWord={guessWord}
         getUserInput={getUserInput}
         setRandomNum={setRandomNum}
+        isGameOver={isGameOver}
+        startOver={startOver}
       />
     </div>
   );
