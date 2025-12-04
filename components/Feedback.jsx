@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function Feedback({ language, randomNum, numAttempts, isGameOver }) {
+function Feedback({ language, randomNum, numAttempts, isGameOver, isWinner }) {
   const [showMessage, setShowMessage] = useState(false);
 
   const options = [
@@ -23,23 +23,45 @@ function Feedback({ language, randomNum, numAttempts, isGameOver }) {
       () => {
         setShowMessage(false);
       },
-      numAttempts===8 ? 999999 : 1500
+      numAttempts === 8 || isWinner ? 999999 : 1500
     );
     // clean up timeout
     return () => clearTimeout(timer);
-  }, [numAttempts]);
+  }, [numAttempts, isWinner]);
+
+  // ✅ Background color logic
+
+ 
+  // ✅ Background color logic 
+  let bgColor = "bg-violet-500"; // default
+  if (isGameOver) {
+    bgColor = "bg-red-500";
+  } else if (isWinner) {
+    bgColor = "bg-green-500";
+  }
+
+
+
+  // ✅ Text logic
+  let displayText = "";
+  if (isWinner) {
+    displayText = "Winner";
+  } else if (isGameOver) {
+    displayText = "Game Over";
+  } else {
+    displayText = options[randomNum];
+  }
 
   return (
     <>
       {showMessage ? (
         <div
-          className={`${isGameOver?"bg-red-500": "bg-violet-500"} text-white 
-    w-xs h-13 flex justify-center items-center
-    rounded-sm border-dashed border-neutral-800
-    my-6`}
+          className={`${bgColor} text-white 
+          w-xs h-13 flex justify-center items-center
+          rounded-sm border-dashed border-neutral-800
+          my-6`}
         >
-          {/* check if game is over */}
-          {isGameOver ? "Game Over" : <p>{options[randomNum]}</p>}
+          {displayText}
         </div>
       ) : (
         <div className="h-25"></div>

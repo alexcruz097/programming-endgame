@@ -18,13 +18,13 @@ function Programs(props) {
       }
       return (
         // return P of programs
-        <p
+        <div
           className={`${program.bgColor} ${textColor} programs`}
           key={program.id}
         >
           {program.name}
           {program.deleted ? <p className="skull-icon">💀</p> : null}
-        </p>
+        </div>
       );
     });
   }

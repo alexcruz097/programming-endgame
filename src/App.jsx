@@ -1,4 +1,4 @@
-import { useEffect, useEffectEvent, useState } from "react";
+import { useEffect, useEffectEvent, useState, useRef } from "react";
 import "./App.css";
 import Header from "../components/Header";
 import Feedback from "../components/Feedback";
@@ -17,6 +17,7 @@ function App() {
   const [randomNum, setRandomNum] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
   const [restartGame, setRestartGame] = useState(false);
+  const [isWinner, setIsWinner] = useState(false);
   // useEffect to set random Number
   const getWord = useEffectEvent(() => {
     // ✅ Only runs once per app load
@@ -32,6 +33,8 @@ function App() {
     setRestartGame(false);
     // isgameover to false
     setIsGameOver(false);
+    // is winner
+    setIsWinner(false);
     // get alphabet
     setAlphabetLetters(alphabet);
     // reset num of attemps
@@ -43,7 +46,6 @@ function App() {
       });
     });
   });
-  console.log(programNames);
   useEffect(() => {
     getWord();
   }, [restartGame]);
@@ -55,6 +57,7 @@ function App() {
     const matchingLetter = guessWord.some((letter) => {
       return letter.letter === letterGuess;
     });
+
     // change the color of the background
     if (matchingLetter) {
       setAlphabetLetters((prevLetters) => {
@@ -145,7 +148,17 @@ function App() {
       setIsGameOver(true);
     }
   }, [numAttempts]);
+  // useEFfect to check if it is a winner
+  useEffect(() => {
+    if (guessWord.length > 0) {
+      const wordMatch = guessWord.every((word) => word.hidden === false);
+      if (wordMatch) {
+        setIsWinner(true);
+      }
+    }
+  }, [guessWord]);
 
+  // start game all over
   const startOver = () => {
     setRestartGame(true);
   };
@@ -164,6 +177,7 @@ function App() {
         randomNum={randomNum}
         numAttempts={numAttempts}
         isGameOver={isGameOver}
+        isWinner={isWinner}
       />
       <Programs programNames={programNames} />
       <WordToGuess guessWord={guessWord} />
@@ -174,6 +188,7 @@ function App() {
         setRandomNum={setRandomNum}
         isGameOver={isGameOver}
         startOver={startOver}
+        isWinner={isWinner}
       />
     </div>
   );
