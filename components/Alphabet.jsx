@@ -10,6 +10,7 @@ function Alphabet({
 }) {
   // update the random num when click
   const isDisabled = isGameOver || isWinner;
+  console.log(alphabetLetters);
   //
   return (
     <>
@@ -19,7 +20,8 @@ function Alphabet({
           return (
             <button
               value={alpha.letter}
-              onClick={getUserInput}
+              // check if bg color has not changed then allow click
+              onClick={alpha.bgColor === "bg-amber-400" ? getUserInput : null}
               disabled={isDisabled}
               key={uuidv4()}
               className={`div${index}  letter ${alpha.bgColor}`}

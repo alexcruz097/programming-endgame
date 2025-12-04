@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 function Feedback({ language, randomNum, numAttempts, isGameOver, isWinner }) {
   const [showMessage, setShowMessage] = useState(false);
@@ -17,7 +17,13 @@ function Feedback({ language, randomNum, numAttempts, isGameOver, isWinner }) {
     `${language}, your watch has ended`,
     `${language} has left the building`,
   ];
+
+  const isFirstRender = useRef(false);
   useEffect(() => {
+    if (!isFirstRender.current) {
+      isFirstRender.current = true;
+      return;
+    }
     setShowMessage(true);
     const timer = setTimeout(
       () => {
@@ -31,16 +37,13 @@ function Feedback({ language, randomNum, numAttempts, isGameOver, isWinner }) {
 
   // ✅ Background color logic
 
- 
-  // ✅ Background color logic 
+  // ✅ Background color logic
   let bgColor = "bg-violet-500"; // default
   if (isGameOver) {
     bgColor = "bg-red-500";
   } else if (isWinner) {
     bgColor = "bg-green-500";
   }
-
-
 
   // ✅ Text logic
   let displayText = "";
