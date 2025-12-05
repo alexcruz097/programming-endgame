@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 function Programs(props) {
   // variable to display text color for programs
   let textColor = "";
