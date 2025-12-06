@@ -27,6 +27,7 @@ function App() {
     setGuessWord(() => {
       return wordArr.map((letter) => {
         return { letter: letter, hidden: true };
+        
       });
     });
     // setrestart game to false
