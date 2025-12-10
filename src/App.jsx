@@ -69,6 +69,7 @@ function App() {
             return letter;
           }
         });
+        
       });
     }
     // update the display of the guess word
