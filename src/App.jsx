@@ -52,6 +52,7 @@ function App() {
   }, [restartGame]);
   // get the letter of the user
   const getUserInput = (e) => {
+    
     // check if letter pressed matches with any letter in the guess word
     let letterGuess = e.target.value.toLowerCase();
 
