@@ -49,6 +49,8 @@ function App() {
   });
   useEffect(() => {
     getWord();
+
+    
   }, [restartGame]);
   // get the letter of the user
   const getUserInput = (e) => {
