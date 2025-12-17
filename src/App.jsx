@@ -78,6 +78,8 @@ function App() {
     // update the display of the guess word
     if (matchingLetter) {
       setGuessWord((prev) => {
+
+        
         return prev.map((letter) => {
           if (letterGuess === letter.letter) {
             return { ...letter, hidden: false };
