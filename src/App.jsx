@@ -85,6 +85,8 @@ function App() {
             return { ...letter, hidden: false };
           } else {
             return letter;
+
+            
           }
         });
       });
