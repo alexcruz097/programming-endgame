@@ -74,6 +74,8 @@ function App() {
         });
         
       });
+
+      
     }
     // update the display of the guess word
     if (matchingLetter) {
