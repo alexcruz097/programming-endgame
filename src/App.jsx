@@ -84,6 +84,10 @@ function App() {
         
         return prev.map((letter) => {
           if (letterGuess === letter.letter) {
+
+
+
+            
             return { ...letter, hidden: false };
           } else {
             return letter;
