@@ -103,6 +103,8 @@ function App() {
         return prevLetters.map((letter) => {
           if (letterGuess.toUpperCase() === letter.letter) {
             return { ...letter, bgColor: "bg-red-400" };
+
+            
           } else {
             return letter;
           } // add the guess word
