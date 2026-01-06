@@ -86,9 +86,6 @@ function App() {
           
           if (letterGuess === letter.letter) {
 
-
-
-            
             return { ...letter, hidden: false };
           } else {
             
