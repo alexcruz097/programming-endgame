@@ -90,11 +90,7 @@ function App() {
           } else {
             
             return letter;
-
-            
-
-            
-          }
+                      }
         });
       });
     }
@@ -102,6 +98,7 @@ function App() {
     if (!matchingLetter) {
       setAlphabetLetters((prevLetters) => {
         return prevLetters.map((letter) => {
+          
           if (letterGuess.toUpperCase() === letter.letter) {
             return { ...letter, bgColor: "bg-red-400" };
 
