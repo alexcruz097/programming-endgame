@@ -95,6 +95,7 @@ function App() {
       });
     }
     // if no match, change the background color to red
+    
     if (!matchingLetter) {
       setAlphabetLetters((prevLetters) => {
         return prevLetters.map((letter) => {
