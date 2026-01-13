@@ -100,6 +100,7 @@ function App() {
       setAlphabetLetters((prevLetters) => {
         return prevLetters.map((letter) => {
           
+          
           if (letterGuess.toUpperCase() === letter.letter) {
             return { ...letter, bgColor: "bg-red-400" };
 
